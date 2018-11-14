@@ -23,7 +23,7 @@
    </thead>
    <tbody>
       
-      <% //맵에 사이즈만큼 ENTRY KEY꺼내오기
+      <% //맵에 사이즈만큼 ENTRY KEY꺼내오기~~!
       
       /* Map<String,AlbasengVO> parameterMap = SimpleFormProcessServlet.albasengs; */
       Map<String,AlbasengVO> parameterMap = (Map<String,AlbasengVO>)getServletContext().getAttribute("albasengs");

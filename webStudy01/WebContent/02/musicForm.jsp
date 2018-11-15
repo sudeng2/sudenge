@@ -10,11 +10,11 @@
    String[] names = folder.list((dir, name)->{
       return application.getMimeType(name).startsWith("text");});
 %>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>02/musicForm.jsp</title>
+<title>02/musicForm.jsp</title> -->
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -59,5 +59,5 @@
    </select>
 </form>
 <div id="resultArea"></div>
-</body>
-</html>
+<!-- </body>
+</html> -->

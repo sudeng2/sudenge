@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ImagesFormServlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletContext context = req.getServletContext();
 		/*String contentFolder = context.getInitParameter("contentFolder");
 		//File folder = new File("d:/contents");
@@ -59,7 +59,7 @@ public class ImagesFormServlet extends HttpServlet {
 	     
 	      PrintWriter out = resp.getWriter();
 	      out.println(html.toString());
-	      out.close();
+	      
 	     
 	}
 

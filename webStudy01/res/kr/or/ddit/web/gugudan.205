@@ -1,5 +1,4 @@
-<html>
-	<head>
+
 		<style type = "text/css">
 			table{
 				border-collaps:collaps;
@@ -9,10 +8,6 @@
 				border:1px solid black;
 			}
 		</style>
-	</head>
-	<body>
 		<table>
 			@gugudan
 		</table>
-	</body>
-</html>

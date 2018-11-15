@@ -17,17 +17,17 @@
 		color:red;
 	}
 </style>
-<%
-Map<String,String> gradeMap = (Map<String,String>)application.getAttribute("gradeMap");
-Map<String,String> licenseMap = (Map<String,String>)application.getAttribute("licenseMap");
-AlbasengVO albaVO = (AlbasengVO)request.getAttribute("albaVO");
+<%--
+// Map<String,String> gradeMap = (Map<String,String>)application.getAttribute("gradeMap");
+// Map<String,String> licenseMap = (Map<String,String>)application.getAttribute("licenseMap");
+/* AlbasengVO albaVO = (AlbasengVO)request.getAttribute("albaVO");
 Map<String,String> errors = (Map<String,String>)request.getAttribute("errors");
 if(albaVO==null){
 	albaVO = new AlbasengVO();
 }
 if(errors==null){
 	errors = new LinkedHashMap<>();
-}
+} */
 
 
 /* String name = request.getParameter("name");
@@ -44,7 +44,11 @@ String license[] = request.getParameterValues("license"); */
 //       vo = (AlbasengVO)request.getAttribute("vo");
 //    }
    
-%>
+--%>
+<jsp:useBean id="gradeMap" class="java.util.HashMap" scope="application"/>
+<jsp:useBean id="licenseMap" class="java.util.LinkedHashMap" scope="application"/>
+<jsp:useBean id="albaVO" class="kr.or.ddit.vo.AlbasengVO" scope="request"/>
+<jsp:useBean id ="errors" class="java.util.LinkedHashMap" scope="request"/>
 </head>
 <body>
 <!-- 알바몬에서 알바생의 프로필을 입력받으려고 함. -->
@@ -109,7 +113,8 @@ String license[] = request.getParameterValues("license"); */
             <option value="">학력</option>
             <%
                String pattern = "<option value='%s' %s> %s </option>";
-               for(Entry<String,String> entry : gradeMap.entrySet()){
+               for(Object obj : gradeMap.entrySet()){
+            	  Entry entry = (Entry)obj;
                   String selected = "";
                   if(entry.getKey().equals(albaVO.getGrade())){
                      selected = "selected";
@@ -138,7 +143,8 @@ String license[] = request.getParameterValues("license"); */
                   if(albaVO.getLicense()!=null){
                      Arrays.sort(albaVO.getLicense());
                   }
-            for(Entry<String,String> entry : licenseMap.entrySet()){
+            for(Object obj : licenseMap.entrySet()){
+            	  Entry entry = (Entry)obj;
                   String selected = "";
                   if(albaVO.getLicense()!=null && Arrays.binarySearch(albaVO.getLicense(), entry.getKey())>-1){
                      selected = "selected";

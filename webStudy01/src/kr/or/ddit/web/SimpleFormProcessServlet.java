@@ -52,6 +52,8 @@ public class SimpleFormProcessServlet extends HttpServlet {
 		getServletContext().setAttribute("gradeMap",gradeMap);
 		getServletContext().setAttribute("licenseMap",licenseMap);
 		getServletContext().setAttribute("albasengs",albasengs);
+		getServletContext().setAttribute("수진","수진이");
+		
 		System.out.println(getClass().getSimpleName()+"초기화");
 	}
    

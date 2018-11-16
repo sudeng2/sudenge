@@ -1,3 +1,6 @@
+<%@page import="kr.or.ddit.utils.CookieUtil.TextType"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="kr.or.ddit.utils.CookieUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -21,6 +24,15 @@
 			goPage = "/";
 			session.setAttribute("authMember",id);
 			redirect = true;
+			String idchecked = request.getParameter("idChecked");
+			if(StringUtils.isNotBlank(idchecked)){
+				Cookie loginCookie = CookieUtil.createCookie("login",id,request.getContextPath(),TextType.PATH,60*60*24*7);
+				response.addCookie(loginCookie);
+			}else{
+				Cookie loginCookie = CookieUtil.createCookie("login",id,request.getContextPath(),TextType.PATH,0);
+				response.addCookie(loginCookie);
+				
+			}
 		}else{
 			//인증실패
 			goPage = "/login/loginForm.jsp";
@@ -34,6 +46,8 @@
 		RequestDispatcher rd = request.getRequestDispatcher(goPage);
 		rd.forward(request, response);//request안에는 파라미터가 들어있고 그 파라미터를 도착지쪽으로 넘겨준다.
 	}
+	
+	
 	
 	
 	//4-2.인증 성공과:웰컴페이지로 이동(원본요청을 제거하고 이동) 

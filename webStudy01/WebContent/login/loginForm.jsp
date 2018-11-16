@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utils.CookieUtil"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="java.util.Objects"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,9 @@
 <%
 	String failedId = request.getParameter("mem_id");
 	String message = (String)session.getAttribute("message");
+	String id = new CookieUtil(request).getCookieValue("login");
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -28,8 +32,10 @@
 <form action = "<%=request.getContextPath() %>/login/loginCheck.jsp" method = "post">
 	<ul>
 		<li>
-			아이디:<input type = "text" name = "mem_id" value = "<%=Objects.toString(failedId,"") %>"/>
-			<label></label><input type = "checkbox" name="idChecked" value = "idSaved"/>아이디 기억하기</label>
+			아이디:<input type = "text" name = "mem_id" value = "<%=Objects.toString(id,"") %>"/>
+			<label>
+			<input type = "checkbox" name="idChecked" value = "idSaved" <%=StringUtils.isNotBlank(id)?"CHECKED":"" %>/>아이디 기억하기
+			</label>
 		</li>
 		<li>
 			비밀번호 : <input type = "password" name = "mem_pass"/>

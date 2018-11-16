@@ -4,14 +4,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.ddit.utils.CookieUtil;
+import kr.or.ddit.utils.CookieUtil.TextType;
+
 public class ImageServiceServlet extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -32,7 +42,28 @@ public class ImageServiceServlet extends HttpServlet {
 			resp.sendError(404);
 			return;
 		}
-		//마임타입
+		//쿠키값 : A,B
+		String imgCookieValue = new CookieUtil(req).getCookieValue("imageCookie");
+		String[] cookieValues = null;
+		ObjectMapper mapper = new ObjectMapper();
+		if(StringUtils.isBlank(imgCookieValue)) {
+			cookieValues = new String[] {imgFile.getName()};
+		}else {
+			String[] cValues = mapper.readValue(imgCookieValue, String[].class);
+			cookieValues = new String[cValues.length+1];
+			System.arraycopy(cValues, 0, cookieValues, 0, cValues.length);
+			cookieValues[cookieValues.length - 1] = imgFile.getName();	
+		}
+//		imgCookieValue = Arrays.toString(cookieValues);
+//		imgCookieValue = imgCookieValue.replaceAll("[\\[\\]\\s]","");
+		//마샬링 marshalling
+		//오브젝트를받아 문자열로 반환해준
+		imgCookieValue = mapper.writeValueAsString(cookieValues);
+		Cookie imageCookie = CookieUtil.createCookie("imageCookie",imgCookieValue, req.getContextPath(),TextType.PATH,60*60*24*3);
+		System.out.println(imgCookieValue);
+		resp.addCookie(imageCookie);
+		
+		//검증
 				ServletContext context = req.getServletContext();
 				resp.setContentType(context.getMimeType(selectImg));		
 		

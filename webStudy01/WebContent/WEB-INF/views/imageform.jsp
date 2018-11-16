@@ -1,3 +1,4 @@
+<%@page contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +25,14 @@
 <body>
 	<form name = "imgForm" action = "imageService" method="get">
 		<select name = "image">
-			@imageform
+<!-- 			@imageform -->
+				<%=request.getAttribute("optionsAttr") %>
 		</select>
 	</form>
 	<div id = "imgArea">
-		@images
+		<%=request.getAttribute("imgTags") %>
 		
 	</div>
-	
 	<script type = "text/javascript">
 		/* 	var imgArea = document.getElementById("imgArea");
 		function changeHandler(event){

@@ -25,7 +25,8 @@ public class ServerFileBrowser extends HttpServlet {
 		FileListGenerator fg = new FileListGenerator();
 		
 		//제일 초기 url을 세팅
-		String url = "d:/A_TeachingMaterial/gitRepo/webStudy01/WebContent/";
+//		String url = "d:/A_TeachingMaterial/gitRepo/webStudy01/WebContent/";
+		String url = getServletContext().getRealPath("");
 		
 		//request에서 fileAddress라는 이름을 가진 input tag의 value 값 가져오기
 		if(req.getParameter("fileAddress")!=null) {

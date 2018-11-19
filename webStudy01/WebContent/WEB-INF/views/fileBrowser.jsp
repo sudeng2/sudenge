@@ -13,15 +13,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
 <script type="text/javascript">
-	
+	$(function(){
 	//a태그 submit 액션주는 메서드
 	// 파라미터 : 파일의 절대경로
-	function moveFile(fileAddr){
+		$('li').on('dblclick',function(){
+			var fform = document.fileForm;
+			fform.fileAddress.value = $(this).attr('value');
+			
+			fform.submit();
+		});
+	});
+
+	
+	
+ 	function moveFile(fileAddr){
 		var fform = document.fileForm;
 		fform.fileAddress.value = fileAddr;
 		fform.submit();
-	}
+	} 
 	
 </script>
 </head>
@@ -40,11 +55,13 @@
 			// 폴더가 아니라 파일이면 href에 alert를 이용해 경고 메시지를 출력한다.
 			if(tmp.isDirectory()){
 	%>
-			<li><a href="javascript:moveFile('<%=url%>');"><%=tmp.getName()%></a></li>	
+<%-- 			<li><a href="javascript:moveFile('<%=url%>');"><%=tmp.getName()%></a></li>	 --%>
+				<li value = "<%=url%>"><%=tmp.getName()%></li>
 	<%			
 			}else{
 	%>
-			<li><a href="void(0);" onclick="alert('경고 : 최하위 파일입니다.');return false;"><%=tmp.getName()%></a></li>
+<%-- 			<li><a href="void(0);" onclick="alert('경고 : 최하위 파일입니다.');return false;"><%=tmp.getName()%></a></li> --%>
+				<li><%=tmp.getName()%></li>
 			
 	<%
 			}

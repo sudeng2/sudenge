@@ -1,10 +1,11 @@
+<%@page import="kr.or.ddit.vo.MemberVO"%>
 <%@page import="kr.or.ddit.web.modulize.ServiceType"%>
 <%@page import="kr.or.ddit.web.url.URL"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%
-      String mem_id = (String)session.getAttribute("authMember");
+      MemberVO authMember = (MemberVO)session.getAttribute("authMember");
 	  String  urlVal = request.getParameter("command");
 	  String urlAddress = "";
 	  
@@ -61,9 +62,9 @@
 	
 	로그인하러가기
    <%
-			if(StringUtils.isNotBlank(mem_id)){
+			if(authMember!=null){
 		%>
-			<%=mem_id%>님 로그인 상태
+			<%=authMember.getMem_name()%>님 로그인 상태
 			<a href="<%=request.getContextPath()%>/login/logout.jsp">로그아웃</a>	
 <%-- 			<jsp:include page = "/login/logout.jsp"/> --%>
 		<%				

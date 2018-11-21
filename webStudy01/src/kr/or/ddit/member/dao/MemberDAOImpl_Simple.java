@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import kr.or.ddit.db.ConnectionFactory;
 import kr.or.ddit.vo.MemberVO;
@@ -53,6 +54,30 @@ public class MemberDAOImpl_Simple implements IMemberDAO{
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public int insertMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<MemberVO> selectMemberList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteMember(String mem_id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -1,6 +1,7 @@
 package kr.or.ddit.vo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class MemberVO implements Serializable{
 	
@@ -35,6 +36,10 @@ public class MemberVO implements Serializable{
 	private String mem_memorialday;
 	private Long mem_mileage;
 	private String mem_delete;
+	
+	public String getAddress(){
+		return Objects.toString(mem_add1,"")+" "+Objects.toString(mem_add2,"");
+	}
 	
 	
 	

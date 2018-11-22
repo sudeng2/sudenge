@@ -1,0 +1,12 @@
+<html>
+	<head>
+	</head>
+	<body>
+	<form action = "imageService" method="get">
+		<select name = "image">
+			@image
+		</select>
+		<input type = "submit" value = "검색"/>
+	</form>
+	</body>
+</html>

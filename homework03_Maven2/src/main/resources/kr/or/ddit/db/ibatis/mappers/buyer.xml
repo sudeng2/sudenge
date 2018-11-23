@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace = "Buyer">
+
+	<sql id = "selectBuyerFrag">
+		SELECT
+		buyer_id,
+	    buyer_name,
+	    buyer_lgu,
+	    buyer_bank,
+	    buyer_bankno,
+	    buyer_bankname,
+	    buyer_zip,
+	    buyer_add1,
+	    buyer_add2,
+	    buyer_comtel,
+	    buyer_fax,
+	    buyer_mail,
+	    buyer_charger,
+	    buyer_telext
+	    from buyer
+	</sql>
+
+	<select id = "selectBuyerList" resultClass = "buyerVO">
+		SELECT B.*
+		FROM(
+		SELECT ROWNUM RNUM,A.*
+		FROM(
+				<include refid="Buyer.selectBuyerFrag"/>
+				ORDER BY ROWID DESC ) A ) B
+		<![CDATA[
+		WHERE RNUM>=#startRow# AND RNUM <= #endRow#
+		]]>
+	</select>
+	
+	<select id = "selectTotalRecord" resultClass = "long">
+		SELECT COUNT(*)
+		FROM BUYER
+	</select>
+	
+	<select id="selectBuyer" parameterClass = "String" resultClass = "buyerVO">
+	<include refid="Buyer.selectBuyerFrag"/>
+	    WHERE BUYER_ID = #asd# 
+	</select>
+	
+	<insert id = "insertBuyer" parameterClass = "buyerVO">
+		INSERT INTO buyer (
+	    BUYER_ID, BUYER_NAME,BUYER_BANK,
+	    BUYER_BANKNO,BUYER_BANKNAME,BUYER_ZIP,
+	    BUYER_ADD1,BUYER_ADD2, BUYER_COMTEL,
+	    BUYER_FAX,BUYER_MAIL, BUYER_CHARGER,
+	    BUYER_TELEXT
+	    )
+		VALUES(
+			#buyer_id#,#buyer_name#,
+		    #buyer_bank#,
+		    #buyer_bankno#,#buyer_bankname#, #buyer_zip#,
+		    #buyer_add1#,#buyer_add2#, #buyer_comtel#,
+		    #buyer_fax#, #buyer_mail#, #buyer_charger#,#buyer_telext#
+		)
+	</insert>
+	
+	<update id = "updateBuyer" parameterClass = "buyerVO">
+		UPDATE BUYER SET
+		BUYER_ID=#buyer_id#, 
+		BUYER_NAME=#buyer_name#,
+		BUYER_BANK=#buyer_bank#,
+	    BUYER_BANKNO=#buyer_bankno#,
+	    BUYER_BANKNAME=#buyer_bankname#,
+	    BUYER_ZIP=#buyer_zip#,
+	    BUYER_ADD1=#buyer_add1#,
+	    BUYER_ADD2=#buyer_add2#, 
+	    BUYER_COMTEL=#buyer_comtel#,
+	    BUYER_FAX=#buyer_fax#,
+	    BUYER_MAIL=#buyer_mail#, 
+	    BUYER_CHARGER=#buyer_charger#,
+	    BUYER_TELEXT=#buyer_telext#
+		
+		WHERE BUYER_ID = #buyer_id#
+	
+	</update>
+</sqlMap>

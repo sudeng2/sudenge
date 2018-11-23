@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.vo.PagingInfoVO"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="kr.or.ddit.db.ConnectionFactory"%>
 <%@page import="java.sql.Connection"%>
@@ -6,8 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-   
-   List<MemberVO> memberList = (List)request.getAttribute("memberList");
+   PagingInfoVO pagingVO = (PagingInfoVO)request.getAttribute("pagingVO");
+   List<MemberVO> memberList = pagingVO.getDataList();
 
 %>
 
@@ -61,6 +62,15 @@
       }
    %>
    </tbody>
+   <tfoot>
+   		<tr>
+   			<td colspan="6">
+   			<nav aria-label="Page navigation example">
+   				<%=pagingVO.getPagingHTML() %>
+			  
+			</nav>
+   		</tr>
+   </tfoot>
 </table>
 
 </body>

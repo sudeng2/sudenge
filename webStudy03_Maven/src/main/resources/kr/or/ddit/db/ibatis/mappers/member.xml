@@ -14,10 +14,21 @@
 		<include refid="Member.selectMemberFrag"/>
 	    WHERE MEM_ID = #asd# 
 	</select>
-	
-	<select id = "selectMemberList" resultClass = "MemberVO">
-	<include refid="Member.selectMemberFrag"/>
-	ORDER BY ROWID DESC
+	<select id = "selectTotalRecord" resultClass = "long">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+	<select id = "selectMemberList" resultClass = "MemberVO" parameterClass = "pagingVO">
+	SELECT B.*
+	FROM(
+	SELECT ROWNUM RNUM,A.*
+	FROM(
+			<include refid="Member.selectMemberFrag"/>
+			ORDER BY ROWID DESC ) A ) B
+	<![CDATA[
+	WHERE RNUM>=#startRow# AND RNUM <= #endRow#
+	]]>
+		
 	
 	</select>
 	<insert id = "insertMember" parameterClass = "memberVO">
@@ -27,7 +38,7 @@
 	    MEM_ZIP,MEM_ADD1, MEM_ADD2,
 	    MEM_HOMETEL,MEM_COMTEL, MEM_HP,
 	    MEM_MAIL, MEM_JOB, MEM_LIKE,
-	    MEM_MEMORIAL, MEM_MEMORIALDAY, MEM_MILEAGE,MEM_AUTH()
+	    MEM_MEMORIAL, MEM_MEMORIALDAY, MEM_MILEAGE,MEM_AUTH
 	    )
 		VALUES(
 			#mem_id#, #mem_pass#,#mem_name#,

@@ -3,6 +3,7 @@ package kr.or.ddit.member.dao;
 import java.util.List;
 
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 /**
  * <pre>
@@ -26,12 +27,19 @@ public interface IMemberDAO {
 	 * @return 성공(>0)실패
 	 */
 	public int insertMember(MemberVO member);
+	/**
+	 * 페이징을 위한 전체 리스트 조회
+	 * @param pagingVO
+	 * @return
+	 */
+	public long selectTotalRecord(PagingInfoVO pagingVO);
 	
 	/**
 	 * 회원 목록 조회
+	 * @param pagingVO TODO
 	 * @return 존재하지 않는다면 .. size()==0
 	 */
-	public List<MemberVO>selectMemberList();
+	public List<MemberVO>selectMemberList(PagingInfoVO pagingVO);
 	/**
 	 * 회원정보 상세 조회
 	 * @param mem_id 조회할 회원의 아이디

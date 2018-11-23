@@ -8,6 +8,7 @@ import java.util.List;
 
 import kr.or.ddit.db.ConnectionFactory;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 public class MemberDAOImpl_Simple implements IMemberDAO{
 
@@ -63,7 +64,7 @@ public class MemberDAOImpl_Simple implements IMemberDAO{
 	}
 
 	@Override
-	public List<MemberVO> selectMemberList() {
+	public List<MemberVO> selectMemberList(PagingInfoVO pagingVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -76,6 +77,12 @@ public class MemberDAOImpl_Simple implements IMemberDAO{
 
 	@Override
 	public int deleteMember(String mem_id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long selectTotalRecord(PagingInfoVO pagingVO) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

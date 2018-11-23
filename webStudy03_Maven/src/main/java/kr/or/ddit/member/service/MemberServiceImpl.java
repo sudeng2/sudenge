@@ -7,6 +7,7 @@ import kr.or.ddit.ServiceResult;
 import kr.or.ddit.member.dao.IMemberDAO;
 import kr.or.ddit.member.dao.MemberDAOImpl;
 import kr.or.ddit.vo.MemberVO;
+import kr.or.ddit.vo.PagingInfoVO;
 
 public class MemberServiceImpl implements IMemberService {
 	//의존 객체를 직접 생성하는 방식 : 결합력 최신
@@ -28,8 +29,8 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public List<MemberVO> retrieveMemberList() {
-		List<MemberVO> memberList = memberDAO.selectMemberList();
+	public List<MemberVO> retrieveMemberList(PagingInfoVO pagingVO) {
+		List<MemberVO> memberList = memberDAO.selectMemberList(pagingVO);
 		return memberList;
 	}
 
@@ -80,5 +81,10 @@ public class MemberServiceImpl implements IMemberService {
 			 result = ServiceResult.INVALIDPASSWORD;
 	}
 	return result;
+	}
+
+	@Override
+	public long retrieveMemberCount(PagingInfoVO pagingVO) {
+		return memberDAO.selectTotalRecord(pagingVO);
 	}
 }
